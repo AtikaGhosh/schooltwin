@@ -1,0 +1,87 @@
+project_id = "schooltwin"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+major_version = 15
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+[studio]
+enabled = true
+port = 54323
+
+[inbucket]
+enabled = true
+port = 54324
+
+[storage]
+enabled = true
+file_size_limit = "30MiB"
+
+[auth]
+enabled = true
+site_url = "http://127.0.0.1:3000"
+additional_redirect_urls = ["http://127.0.0.1:3000/**"]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+refresh_token_reuse_interval = 10
+enable_signup = false
+minimum_password_length = 12
+
+[auth.email]
+enable_signup = false
+double_confirm_changes = true
+enable_confirmations = true
+
+[edge_runtime]
+enabled = true
+policy = "per_worker"
+
+[functions.device-pair]
+verify_jwt = true
+[functions.device-refresh]
+verify_jwt = true
+[functions.device-revoke]
+verify_jwt = true
+[functions.sync-pull]
+verify_jwt = true
+[functions.sync-push]
+verify_jwt = true
+[functions.participant-redeem]
+verify_jwt = false
+[functions.participant-submit]
+verify_jwt = false
+[functions.capture-begin]
+verify_jwt = true
+[functions.capture-finalize]
+verify_jwt = true
+[functions.evidence-download]
+verify_jwt = true
+[functions.admin-school-save]
+verify_jwt = true
+[functions.admin-operator-invite]
+verify_jwt = true
+[functions.admin-device-manage]
+verify_jwt = true
+[functions.admin-pass-batch-create]
+verify_jwt = true
+[functions.admin-pass-batch-revoke]
+verify_jwt = true
+[functions.admin-pass-batch-confirm]
+verify_jwt = true
+[functions.evidence-fingerprint-worker]
+verify_jwt = false
+[functions.retention-worker]
+verify_jwt = false
+
+[functions.health]
+verify_jwt = false

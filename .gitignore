@@ -8,8 +8,19 @@ __v0_jsx-dev-runtime.ts
 
 # Environment variables
 .env*.local
+.env
+.env.production
+.env.staging
+supabase/.branches/
+supabase/.temp/
 
 # Common ignores
 node_modules
 .next/
+playwright-report/
+test-results/
+coverage/
+.tmp/
+tsconfig.tsbuildinfo
 .DS_Store
+~$*.docx
