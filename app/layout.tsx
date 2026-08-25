@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'SchoolTwin — Today’s School Work',
+  title: 'DrishtiShala — Today’s School Work',
   description:
     'A bilingual daily work assistant for school collection workflows.',
   generator: 'v0.app',

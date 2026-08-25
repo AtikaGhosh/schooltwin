@@ -20,7 +20,7 @@ export function AdminConsole() {
         action="admin-school-save"
         fields={[
           ['name', 'School name'],
-          ['schoolTwinId', 'SchoolTwin ID'],
+          ['schoolTwinId', 'DrishtiShala ID'],
           ['district', 'District'],
           ['state', 'State'],
           ['timeZone', 'Time zone'],

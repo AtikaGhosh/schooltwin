@@ -4,7 +4,7 @@ import { createDemoSeed } from '@/lib/schooltwin/domain/seed'
 import { deriveTaskStatus } from '@/lib/schooltwin/domain/task-state'
 import { validateClassPulseResponse } from '@/lib/schooltwin/domain/daily-coverage'
 import {
-  schoolDayWindow,
+  demoAnytimeWindow,
   toOperatorDailyCoverageView,
 } from '@/lib/schooltwin/domain/daily-coverage'
 import { toTodayWorkView } from '@/lib/schooltwin/domain/today-work'
@@ -12,9 +12,9 @@ import { toTodayWorkView } from '@/lib/schooltwin/domain/today-work'
 const now = new Date('2026-08-22T10:00:00.000Z')
 
 describe('daily coverage domain', () => {
-  it('derives every routine assignment from the configured school hours', async () => {
+  it('makes every fictional demo assignment available for the full local day', async () => {
     const seed = await createDemoSeed(now, async (value) => `hash:${value}`)
-    const window = schoolDayWindow(seed.school, '2026-08-22')
+    const window = demoAnytimeWindow(seed.school, '2026-08-22')
     expect(seed.school).toMatchObject({
       timeZone: 'Asia/Kolkata',
       openingTime: '10:00',
@@ -163,7 +163,7 @@ describe('daily coverage domain', () => {
     })
   })
 
-  it('presents unopened work before opening and not done after closing', async () => {
+  it('keeps demo work available outside the real school premises hours', async () => {
     const seed = await createDemoSeed(now, async (value) => `hash:${value}`)
     const buildWork = (at: Date) => {
       const day = seed.pulseDays.find((item) => item.dateKey === '2026-08-22')!
@@ -179,11 +179,11 @@ describe('daily coverage domain', () => {
       })
       return toTodayWorkView({ coverage, tasks: seed.tasks, now: at })
     }
-    const beforeOpen = buildWork(new Date('2026-08-22T04:00:00.000Z'))
-    expect(beforeOpen.notOpenYet).toHaveLength(11)
-    expect(beforeOpen.doNow).toHaveLength(0)
-    const afterClose = buildWork(new Date('2026-08-22T10:31:00.000Z'))
-    expect(afterClose.notDone).toHaveLength(11)
-    expect(afterClose.notOpenYet).toHaveLength(0)
+    const beforeOpen = buildWork(new Date('2026-08-21T20:30:00.000Z'))
+    expect(beforeOpen.notOpenYet).toHaveLength(0)
+    expect(beforeOpen.doNow).toHaveLength(11)
+    const afterClose = buildWork(new Date('2026-08-22T16:30:00.000Z'))
+    expect(afterClose.doNow).toHaveLength(11)
+    expect(afterClose.notDone).toHaveLength(0)
   })
 })

@@ -44,6 +44,24 @@ export function schoolDayWindow(
   return { dateKey, opensAt, closesAt }
 }
 
+/**
+ * Fictional hackathon data is usable throughout the school's current local
+ * calendar day. Production assignments continue to use server-issued windows.
+ */
+export function demoAnytimeWindow(
+  school: Pick<School, 'timeZone'>,
+  dateKey: string,
+): SchoolDayWindow {
+  const opensAt = zonedWallTime(dateKey, '00:00', school.timeZone)
+  const nextDateKey = toDateKey(
+    new Date(dateKeyAtNoon(dateKey).getTime() + 24 * 60 * 60 * 1_000),
+  )
+  const closesAt = new Date(
+    zonedWallTime(nextDateKey, '00:00', school.timeZone).getTime() - 1,
+  )
+  return { dateKey, opensAt, closesAt }
+}
+
 function zonedWallTime(
   dateKey: string,
   wallTime: string,

@@ -94,13 +94,16 @@ Approved language includes:
 - Store binary capture blobs separately from structured records.
 - Derive task availability from the injected clock and task window. Do not
   persist `available` as a task status.
-- Standard daily collection windows derive from each school's configured time
+- Production daily collection windows derive from each school's configured time
   zone, opening time, and closing time. Do not add short routine windows or a
   “Later today” queue. Before opening show “Not open yet”; during school hours
   show “Do now”; after closing show “Not done”. Keep the configured completion
   grace only for work started before closing.
 - Time-restricted surprise verification belongs to the future Officials App
   and is not part of this School Collection prototype.
+- The fictional hackathon demo is available throughout the current school-local
+  calendar day so it can be presented at any time. This does not weaken or
+  replace production server-controlled assignment windows.
 - Keep `schooltwin-prototype` and `schooltwin-production-cache` separate. Never
   copy fictional demo records, passes, evidence, or events into production.
 - Use TypeScript strict typing. Do not bypass modeling with `any`.

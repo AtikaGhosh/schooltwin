@@ -26,7 +26,7 @@ export function SetupView() {
           <Step
             icon={<MapPin className="size-4" />}
             title="Review identity"
-            description="Confirm name, district, state, and SchoolTwin ID."
+            description="Confirm name, district, state, and DrishtiShala ID."
           />
           <Step
             icon={<CheckCircle2 className="size-4" />}

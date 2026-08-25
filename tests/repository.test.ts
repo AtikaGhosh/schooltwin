@@ -27,7 +27,7 @@ afterEach(async () => {
   await Promise.all(dbNames.splice(0).map((name) => deleteDB(name)))
 })
 
-describe('IndexedDbSchoolTwinRepository v5 school-hours coverage', () => {
+describe('IndexedDbSchoolTwinRepository v5 demo-day coverage', () => {
   it('upgrades v3 without deleting legacy records and backfills daily coverage', async () => {
     const name = 'schooltwin-v3-upgrade-test'
     dbNames.push(name)
@@ -232,7 +232,7 @@ describe('IndexedDbSchoolTwinRepository v5 school-hours coverage', () => {
     const result = await repository.redeemAccessGrant(
       'session-student-pulse-demo',
       'P7K-4M9',
-      new Date('2026-08-22T14:00:01.000Z'),
+      new Date('2026-08-22T18:35:00.000Z'),
     )
     expect(result).toEqual({ ok: false, reason: 'expired' })
     repository.close()

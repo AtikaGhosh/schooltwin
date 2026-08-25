@@ -1,11 +1,11 @@
-# SchoolTwin School Collection App
+# DrishtiShala School Collection App
 
 The operator experience is an action-first bilingual daily work assistant:
 “Here is what you need to do today. Do the next thing.” Visible language is
 simple English or Odia; participant answers, credentials, and private report
 content remain hidden from the operator.
 
-SchoolTwin now has two deliberately separate deployment modes. Demo mode is a local-only, fictional workspace. Production mode uses the pilot Supabase backend for named accounts, paired devices, server-created work, one-use participant passes, protected responses, offline operator queues, resumable private video upload, retention, and audit events. Fictional demo records are never copied into production.
+DrishtiShala has two deliberately separate deployment modes. Demo mode is a local-only, fictional workspace. Production mode uses the pilot Supabase backend for named accounts, paired devices, server-created work, one-use participant passes, protected responses, offline operator queues, resumable private video upload, retention, and audit events. Fictional demo records are never copied into production.
 
 Core rule:
 

@@ -60,7 +60,7 @@ export function OperatorShell({ children }: { children: ReactNode }) {
                 <Waypoints className="size-4" />
               </span>
               <div>
-                <p className="text-sm font-semibold">SchoolTwin</p>
+                <p className="text-sm font-semibold">DrishtiShala</p>
                 <p className="text-muted-foreground hidden max-w-40 truncate text-[10px] min-[440px]:block">
                   Sundarpur Government High School
                 </p>
@@ -118,7 +118,7 @@ function Brand() {
         <Waypoints className="size-4" />
       </span>
       <div>
-        <p className="text-[13px] font-semibold">SchoolTwin</p>
+        <p className="text-[13px] font-semibold">DrishtiShala</p>
         <p className="text-sidebar-foreground/60 text-[11px]">
           Sundarpur Government High School
         </p>

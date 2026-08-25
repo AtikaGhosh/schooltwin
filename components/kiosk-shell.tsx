@@ -17,7 +17,7 @@ export function KioskShell({ children }: { children: ReactNode }) {
               <Waypoints className="size-5" />
             </span>
             <div>
-              <p className="text-sm font-semibold">SchoolTwin</p>
+              <p className="text-sm font-semibold">DrishtiShala</p>
               <p className="text-muted-foreground text-[11px]">
                 {locale === 'or'
                   ? 'ଗୋପନୀୟ ଅଂଶଗ୍ରହଣ ପୃଷ୍ଠା'

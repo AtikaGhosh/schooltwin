@@ -210,6 +210,9 @@ export class IndexedDbSchoolTwinRepository implements SchoolTwinRepository {
     if (!(await db.get('metadata', 'school-hours-seed'))) {
       await this.backfillSchoolHours(this.now())
     }
+    if (!(await db.get('metadata', 'demo-anytime-seed'))) {
+      await this.backfillDemoAnytime(this.now())
+    }
   }
 
   async getSchool(): Promise<School> {
@@ -881,6 +884,76 @@ export class IndexedDbSchoolTwinRepository implements SchoolTwinRepository {
     await tx.done
   }
 
+  private async backfillDemoAnytime(now: Date): Promise<void> {
+    const db = await this.db()
+    const seed = await createDemoSeed(now, this.hashCode)
+    const stores = [
+      'metadata',
+      'tasks',
+      'class_pulse_assignments',
+      'facility_pulse_assignments',
+      'sessions',
+      'access_grants',
+    ] as const
+    const tx = db.transaction(stores, 'readwrite')
+
+    for (const seeded of seed.tasks) {
+      const store = tx.objectStore('tasks')
+      const existing = await store.get(seeded.id)
+      if (!existing) continue
+      await store.put({
+        ...existing,
+        scheduledStart: seeded.scheduledStart,
+        scheduledEnd: seeded.scheduledEnd,
+        status:
+          existing.status === 'submitted' || existing.status === 'in_progress'
+            ? existing.status
+            : 'scheduled',
+      })
+    }
+    for (const seeded of seed.classPulseAssignments) {
+      const store = tx.objectStore('class_pulse_assignments')
+      const existing = await store.get(seeded.id)
+      if (!existing) continue
+      await store.put({
+        ...existing,
+        scheduledStart: seeded.scheduledStart,
+        scheduledEnd: seeded.scheduledEnd,
+        status:
+          existing.status === 'submitted' || existing.status === 'in_progress'
+            ? existing.status
+            : 'scheduled',
+      })
+    }
+    for (const seeded of seed.facilityPulseAssignments) {
+      const store = tx.objectStore('facility_pulse_assignments')
+      const existing = await store.get(seeded.id)
+      if (existing)
+        await store.put({
+          ...existing,
+          scheduledStart: seeded.scheduledStart,
+          scheduledEnd: seeded.scheduledEnd,
+        })
+    }
+    for (const seeded of seed.sessions) {
+      const store = tx.objectStore('sessions')
+      const existing = await store.get(seeded.id)
+      if (existing)
+        await store.put({ ...existing, expiresAt: seeded.expiresAt })
+    }
+    for (const seeded of seed.accessGrants) {
+      const store = tx.objectStore('access_grants')
+      const existing = await store.get(seeded.id)
+      if (existing)
+        await store.put({ ...existing, expiresAt: seeded.expiresAt })
+    }
+    await tx.objectStore('metadata').put({
+      key: 'demo-anytime-seed',
+      value: { demoAnytimeSeedVersion: 1 },
+    })
+    await tx.done
+  }
+
   async resetDemo(now = this.now()): Promise<void> {
     const db = await this.db()
     const localeRecord = await db.get('metadata', 'ui-locale')
@@ -905,6 +978,10 @@ export class IndexedDbSchoolTwinRepository implements SchoolTwinRepository {
     await tx.objectStore('metadata').put({
       key: 'school-hours-seed',
       value: { schoolHoursSeedVersion: 1 },
+    })
+    await tx.objectStore('metadata').put({
+      key: 'demo-anytime-seed',
+      value: { demoAnytimeSeedVersion: 1 },
     })
     await tx.objectStore('metadata').put({
       key: seed.storageStatus.id,

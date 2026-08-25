@@ -116,11 +116,12 @@ that boundary becomes failed. Transitions are centralized and tested.
 Class and private sessions use `issued → active → completed` or `expired`.
 Access Grants use `issued → redeemed` or `expired`.
 
-Each `School` owns its `timeZone`, `openingTime`, and `closingTime`. All standard
-daily Class Pulse, Live Evidence, Facility Pulse, and selected facility-video
-assignments use that same school-day window. Before opening the presentation is
-“Not open yet”; during operating hours it is “Do now”; after closing an
-unfinished assignment is “Not done”. The School app has no “Later today” queue.
+Each `School` owns its `timeZone`, `openingTime`, and `closingTime`. Production
+assignments use server-issued windows based on that configuration. The isolated
+fictional hackathon demo deliberately uses the full current school-local
+calendar day, allowing it to be presented before 10:00 AM or after 4:00 PM.
+This demo convenience does not change production time enforcement. The School
+app has no “Later today” queue.
 Rare time-restricted surprise verification is deferred to the future Officials
 App. Work started before closing retains the five-minute completion grace.
 
@@ -130,11 +131,11 @@ The seed preserves the 18-section Class 1A–9B roster and creates five
 operational school days in `Asia/Kolkata`, skipping weekends where possible.
 Today is always relative to the injected clock.
 
-- Class Pulse: 14 submitted; 7B, 8A, 8B, and 9A remain open during school hours.
+- Class Pulse: 14 submitted; 7B, 8A, 8B, and 9A remain open throughout the demo day.
 - Live Class Evidence: 1A–6B submitted; all six remaining sections use the same
   full school-day window.
 - The Facility Pulse and Kitchen video are submitted; Drinking Water video
-  remains open until closing and becomes Not done only after closing.
+  remains open throughout the demo day.
 - Completed assignments always have matching protected response, operator-safe
   Submission, and AuditEvent records.
 

@@ -36,7 +36,7 @@ export function MfaSetup() {
       }
       const result = await client.auth.mfa.enroll({
         factorType: 'totp',
-        friendlyName: 'SchoolTwin admin',
+        friendlyName: 'DrishtiShala admin',
       })
       if (!active) return
       if (result.error) setError(result.error.message)

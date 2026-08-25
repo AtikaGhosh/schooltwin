@@ -28,17 +28,15 @@ test('root opens the simplified pre-paired daily assistant', async ({
   await expect(page.getByRole('heading', { name: 'Class 8A' })).toHaveCount(0)
 })
 
-test('before opening, unfinished routine work is clearly not open yet', async ({
+test('hackathon demo work remains available outside school premises hours', async ({
   page,
 }) => {
-  const schoolTime = simulatedSchoolTime()
-  await page.clock.setFixedTime(
-    new Date(schoolTime.getTime() - 4 * 60 * 60 * 1_000),
-  )
+  await page.clock.setFixedTime(new Date('2026-08-21T20:30:00.000Z'))
   await page.goto('/home')
-  await expect(page.getByText('Not open yet').first()).toBeVisible()
-  await expect(page.getByText(/Today’s work opens at 10:00 am/)).toBeVisible()
-  await expect(page.getByRole('link', { name: /Record now/ })).toHaveCount(0)
+  await expect(
+    page.getByText('Hackathon demo · Available anytime today'),
+  ).toBeVisible()
+  await expect(page.getByRole('link', { name: /Record now/ })).toBeVisible()
 })
 
 test('operator routes survive direct navigation and exclude Officials intelligence', async ({
@@ -90,7 +88,7 @@ test('Today’s Work groups jobs and Class 8A shows five neutral school days', a
     0,
   )
   await expect(page.getByText('Drinking Water')).toBeVisible()
-  await expect(page.getByText('Complete before 4:00 pm').first()).toBeVisible()
+  await expect(page.getByText('Available anytime today').first()).toBeVisible()
   await page.getByText('View all classes').click()
   await expect(page.getByRole('row')).toHaveCount(19)
   await page.goto('/twin/area-class-8a')

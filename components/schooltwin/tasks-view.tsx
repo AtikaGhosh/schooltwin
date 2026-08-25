@@ -11,6 +11,7 @@ import {
   TaskStatusBadge,
 } from '@/components/primitives'
 import { CoverageMatrix } from '@/components/schooltwin/coverage-matrix'
+import { isProductionMode } from '@/lib/schooltwin/backend/config'
 import { formatTime, workLabel } from '@/components/schooltwin/home-view'
 import type { TodayWorkItem } from '@/lib/schooltwin/domain/today-work'
 import { toTodayWorkView } from '@/lib/schooltwin/domain/today-work'
@@ -135,6 +136,7 @@ function WorkItem({
   compact?: boolean
 }) {
   const { t } = useSchoolTwin()
+  const demoMode = !isProductionMode()
   const content = (
     <>
       <div>
@@ -156,9 +158,11 @@ function WorkItem({
               ? t('work.windowMissed')
               : item.status === 'not_open_yet'
                 ? t('common.notOpenYet')
-                : t('work.completeBefore', {
-                    time: formatTime(item.scheduledEnd, locale),
-                  })}
+                : demoMode
+                  ? t('work.availableAnytime')
+                  : t('work.completeBefore', {
+                      time: formatTime(item.scheduledEnd, locale),
+                    })}
           </p>
         ) : null}
       </div>
@@ -187,6 +191,7 @@ export function TaskDetailView({ taskId }: { taskId: string }) {
   const workspace = useWorkspace()
   const now = useNow(10_000)
   const { t, intlLocale } = useSchoolTwin()
+  const demoMode = !isProductionMode()
   if (workspace.loading || !workspace.data)
     return workspace.error ? (
       <ErrorState message={workspace.error} />
@@ -237,9 +242,11 @@ export function TaskDetailView({ taskId }: { taskId: string }) {
         </div>
         <p className="text-muted-foreground mt-4 text-sm">
           {item
-            ? t('work.completeBefore', {
-                time: formatTime(item.scheduledEnd, intlLocale),
-              })
+            ? demoMode
+              ? t('work.availableAnytime')
+              : t('work.completeBefore', {
+                  time: formatTime(item.scheduledEnd, intlLocale),
+                })
             : ''}
         </p>
         {status === 'available' || status === 'in_progress' ? (
