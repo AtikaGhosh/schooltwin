@@ -87,7 +87,7 @@ export function SubmissionsView() {
   async function resetDemo() {
     if (
       !window.confirm(
-        'Reset the SchoolTwin demo? All locally captured prototype evidence will be deleted.',
+        'Reset the DrishtiShala demo? All locally captured prototype evidence will be deleted.',
       )
     )
       return
@@ -399,7 +399,7 @@ export function PrivacyView() {
           {productionMode ? (
             <>
               <p>
-                Accepted school work is stored by the SchoolTwin pilot server.
+                Accepted school work is stored by the DrishtiShala pilot server.
                 Videos use private storage and short-lived playback links.
               </p>
               <p>

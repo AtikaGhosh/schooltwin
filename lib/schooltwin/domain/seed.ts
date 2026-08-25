@@ -143,7 +143,7 @@ export async function createDemoSeed(
   const device: SchoolDevice = {
     id: DEMO_DEVICE_ID,
     schoolId: school.id,
-    label: 'Sundarpur SchoolTwin device',
+    label: 'Sundarpur DrishtiShala device',
     pairedAtLocal,
     prototypePairing: true,
   }

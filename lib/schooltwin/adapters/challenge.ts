@@ -22,7 +22,7 @@ export class LocalChallengeGenerator implements ChallengeGenerator {
       displayCode,
       title: task.title,
       steps: [
-        'Confirm the expected SchoolTwin marker.',
+        'Confirm the expected DrishtiShala marker.',
         'Show the requested area clearly.',
         'Pan continuously from left to right.',
         'End at the area entrance or boundary.',

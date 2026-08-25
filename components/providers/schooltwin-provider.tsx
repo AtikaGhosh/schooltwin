@@ -67,7 +67,7 @@ export function SchoolTwinProvider({ children }: { children: ReactNode }) {
           setError(
             cause instanceof Error
               ? cause.message
-              : 'The local SchoolTwin workspace could not be opened.',
+              : 'The local DrishtiShala workspace could not be opened.',
           )
         }
       })

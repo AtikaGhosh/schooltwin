@@ -94,7 +94,7 @@ const en = {
   'demoCodes.open': 'Open check',
   'demoCodes.reset': 'Reset demo codes',
   'demoCodes.resetConfirm':
-    'Reset the SchoolTwin demo? All locally captured prototype evidence will be deleted.',
+    'Reset the DrishtiShala demo? All locally captured prototype evidence will be deleted.',
   'school.title': 'Our School',
   'school.students': 'students',
   'school.todayWork': 'Today’s work',
@@ -204,7 +204,7 @@ const or: Dictionary = {
   'demoCodes.open': 'ଯାଞ୍ଚ ଖୋଲନ୍ତୁ',
   'demoCodes.reset': 'ଡେମୋ କୋଡ୍ ପୁଣି ପ୍ରସ୍ତୁତ କରନ୍ତୁ',
   'demoCodes.resetConfirm':
-    'SchoolTwin ଡେମୋ ପୁଣି ପ୍ରସ୍ତୁତ କରିବେ? ଏହି ବ୍ରାଉଜରରେ ଥିବା ସବୁ ଡେମୋ ଭିଡିଓ ଓ ତଥ୍ୟ ହଟିଯିବ।',
+    'DrishtiShala ଡେମୋ ପୁଣି ପ୍ରସ୍ତୁତ କରିବେ? ଏହି ବ୍ରାଉଜରରେ ଥିବା ସବୁ ଡେମୋ ଭିଡିଓ ଓ ତଥ୍ୟ ହଟିଯିବ।',
   'school.title': 'ଆମ ସ୍କୁଲ',
   'school.students': 'ଛାତ୍ରଛାତ୍ରୀ',
   'school.todayWork': 'ଆଜିର କାମ',

@@ -411,7 +411,7 @@ export function CaptureView({ taskId }: { taskId: string }) {
         setFingerprint(sha256)
         setTask(completedTask)
         setStep('submitted')
-        setMessage('Sent and accepted by SchoolTwin.')
+        setMessage('Sent and accepted by DrishtiShala.')
         captureService.dispose()
         refresh()
         return
@@ -665,7 +665,7 @@ export function CaptureView({ taskId }: { taskId: string }) {
               Technical details
             </summary>
             <div className="mt-3 grid gap-2 text-sm">
-              <p>Recorded continuously in this SchoolTwin session.</p>
+              <p>Recorded continuously in this DrishtiShala session.</p>
               <p>Expected classroom marker observed.</p>
               <p>Local capture timestamp recorded.</p>
               <p>Evidence fingerprint generated.</p>

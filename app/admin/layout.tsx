@@ -14,7 +14,7 @@ export default async function AdminLayout({
       <header className="border-border bg-card border-b">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
           <div>
-            <p className="font-semibold">SchoolTwin setup</p>
+            <p className="font-semibold">DrishtiShala setup</p>
             <p className="text-muted-foreground text-xs">
               {account.displayName}
             </p>
