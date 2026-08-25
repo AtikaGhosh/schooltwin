@@ -1,10 +1,5 @@
-import { StoreProvider } from "@/lib/store"
-import { AppShell } from "@/components/app-shell"
+import { redirect } from 'next/navigation'
 
 export default function Page() {
-  return (
-    <StoreProvider>
-      <AppShell />
-    </StoreProvider>
-  )
+  redirect('/home')
 }
