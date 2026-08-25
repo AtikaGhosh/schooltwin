@@ -1,4 +1,5 @@
 import {
+  demoAnytimeWindow,
   previousOperationalDateKeys,
   schoolDayWindow,
   schoolDateKey,
@@ -129,11 +130,13 @@ export async function createDemoSeed(
     closingTime: '16:00',
     pairedAtLocal,
   }
-  const dailyWindow = schoolDayWindow(school, currentDateKey)
-  const opensAt = dailyWindow.opensAt.getTime()
+  const dailyWindow = demoAnytimeWindow(school, currentDateKey)
+  const displayWindow = schoolDayWindow(school, currentDateKey)
   const closesAt = dailyWindow.closesAt.getTime()
   const withinSchoolDay = (minutesAfterOpening: number) =>
-    new Date(opensAt + minutesAfterOpening * 60_000).toISOString()
+    new Date(
+      displayWindow.opensAt.getTime() + minutesAfterOpening * 60_000,
+    ).toISOString()
   const dailyStart = dailyWindow.opensAt.toISOString()
   const dailyEnd = dailyWindow.closesAt.toISOString()
   const participantExpiry = new Date(closesAt + 5 * 60_000).toISOString()

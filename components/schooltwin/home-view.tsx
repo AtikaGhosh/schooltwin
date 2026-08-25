@@ -12,6 +12,7 @@ import {
 
 import { useSchoolTwin } from '@/components/providers/schooltwin-provider'
 import { Card, ErrorState, LoadingState } from '@/components/primitives'
+import { isProductionMode } from '@/lib/schooltwin/backend/config'
 import type { TodayWorkItem } from '@/lib/schooltwin/domain/today-work'
 import { toTodayWorkView } from '@/lib/schooltwin/domain/today-work'
 import { useNow } from '@/lib/schooltwin/hooks/use-now'
@@ -21,6 +22,7 @@ export function HomeView() {
   const workspace = useWorkspace()
   const now = useNow()
   const { t, intlLocale } = useSchoolTwin()
+  const demoMode = !isProductionMode()
   if (workspace.loading || !workspace.data)
     return workspace.error ? (
       <ErrorState message={workspace.error} />
@@ -49,16 +51,22 @@ export function HomeView() {
           }).format(now)}
         </p>
         <p className="text-muted-foreground mt-3 text-sm">
-          <span className="font-medium">{t('home.schoolHours')}</span>{' '}
-          {formatSchoolHours(
-            work.done[0]?.scheduledStart ??
-              work.notOpenYet[0]?.scheduledStart ??
-              work.doNow[0]?.scheduledStart,
-            work.done[0]?.scheduledEnd ??
-              work.notOpenYet[0]?.scheduledEnd ??
-              work.doNow[0]?.scheduledEnd,
-            intlLocale,
-            school.timeZone,
+          {demoMode ? (
+            <span className="font-medium">{t('home.demoAnytime')}</span>
+          ) : (
+            <>
+              <span className="font-medium">{t('home.schoolHours')}</span>{' '}
+              {formatSchoolHours(
+                work.done[0]?.scheduledStart ??
+                  work.notOpenYet[0]?.scheduledStart ??
+                  work.doNow[0]?.scheduledStart,
+                work.done[0]?.scheduledEnd ??
+                  work.notOpenYet[0]?.scheduledEnd ??
+                  work.doNow[0]?.scheduledEnd,
+                intlLocale,
+                school.timeZone,
+              )}
+            </>
           )}
         </p>
       </header>
@@ -105,14 +113,16 @@ export function HomeView() {
           ) : null}
         </p>
         <p className="text-muted-foreground mt-2 text-sm font-medium">
-          {t('home.completeBefore', {
-            time: formatTime(
-              work.done[0]?.scheduledEnd ??
-                work.notOpenYet[0]?.scheduledEnd ??
-                work.doNow[0]?.scheduledEnd,
-              intlLocale,
-            ),
-          })}
+          {demoMode
+            ? t('work.availableAnytime')
+            : t('home.completeBefore', {
+                time: formatTime(
+                  work.done[0]?.scheduledEnd ??
+                    work.notOpenYet[0]?.scheduledEnd ??
+                    work.doNow[0]?.scheduledEnd,
+                  intlLocale,
+                ),
+              })}
         </p>
       </section>
 
@@ -220,6 +230,7 @@ export function HomeView() {
 
 function NextCard({ item }: { item: TodayWorkItem }) {
   const { t, intlLocale } = useSchoolTwin()
+  const demoMode = !isProductionMode()
   return (
     <Card className="premium-next overflow-hidden">
       <div className="p-5 sm:p-7">
@@ -243,9 +254,11 @@ function NextCard({ item }: { item: TodayWorkItem }) {
         </div>
         <p className="text-muted-foreground mt-3 flex items-center gap-2 text-sm">
           <Clock3 className="size-4" />
-          {t('work.completeBefore', {
-            time: formatTime(item.scheduledEnd, intlLocale),
-          })}
+          {demoMode
+            ? t('work.availableAnytime')
+            : t('work.completeBefore', {
+                time: formatTime(item.scheduledEnd, intlLocale),
+              })}
         </p>
         <Link
           href={item.href}

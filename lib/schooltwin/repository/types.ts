@@ -113,6 +113,7 @@ export interface MetadataRecord {
     | { locale: UiLocale }
     | { actionFirstSeedVersion: 1 }
     | { schoolHoursSeedVersion: 1 }
+    | { demoAnytimeSeedVersion: 1 }
 }
 
 export interface CaptureBlobRecord {

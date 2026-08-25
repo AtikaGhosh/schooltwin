@@ -25,9 +25,10 @@ now** without being taught SchoolTwin terminology.
 - Latest Chrome or Chromium
 - HTTPS deployment or `localhost`
 - Camera permission enabled for Live Evidence
-- Run the judge storyline during Sundarpur's configured 10:00 AM–4:00 PM school
-  day. Automated browser tests fix the browser clock at 1:00 PM IST; capture
-  timestamps in the application continue to use the actual local clock.
+- The fictional judge storyline is available throughout the current India-local
+  calendar day, including before 10:00 AM and after 4:00 PM. Production mode
+  continues to use server-issued work windows. Capture timestamps continue to
+  use the actual local clock.
 
 ## Prototype participant credentials
 
@@ -57,7 +58,7 @@ always used as the demo day:
 
 - 18 Class School Pulse assignments: 14 submitted and 4 available;
 - 18 Live Class Evidence assignments: Classes 1A–6B submitted and all six
-  remaining videos available throughout school hours;
+  remaining videos available throughout the demo day;
 - one submitted operator Facility Pulse;
 - submitted Kitchen video and open Drinking Water video; and
 - private Student Pulse status without answers or counts.
