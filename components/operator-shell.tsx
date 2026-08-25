@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import type { ReactNode } from 'react'
 import {
@@ -11,7 +12,6 @@ import {
   Home,
   Languages,
   MessageSquareWarning,
-  Waypoints,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -56,11 +56,15 @@ export function OperatorShell({ children }: { children: ReactNode }) {
         <header className="bg-background/92 sticky top-0 z-20 backdrop-blur-xl">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3.5 md:px-8">
             <div className="flex items-center gap-2 md:hidden">
-              <span className="brand-mark text-primary-foreground hidden size-9 items-center justify-center rounded-lg min-[430px]:flex">
-                <Waypoints className="size-4" />
-              </span>
               <div>
-                <p className="text-sm font-semibold">DrishtiShala</p>
+                <Image
+                  src="/drishtishala-logo.svg"
+                  alt="DrishtiShala"
+                  width={680}
+                  height={200}
+                  priority
+                  className="h-auto w-32 dark:brightness-0 dark:invert"
+                />
                 <p className="text-muted-foreground hidden max-w-40 truncate text-[10px] min-[440px]:block">
                   Sundarpur Government High School
                 </p>
@@ -113,13 +117,17 @@ export function OperatorShell({ children }: { children: ReactNode }) {
 
 function Brand() {
   return (
-    <div className="border-sidebar-border/70 flex items-center gap-2.5 border-b px-4 py-4">
-      <span className="brand-mark text-primary-foreground flex size-8 items-center justify-center rounded-lg">
-        <Waypoints className="size-4" />
-      </span>
+    <div className="border-sidebar-border/70 flex min-h-[73px] items-center border-b px-4 py-3">
       <div>
-        <p className="text-[13px] font-semibold">DrishtiShala</p>
-        <p className="text-sidebar-foreground/60 text-[11px]">
+        <Image
+          src="/drishtishala-logo.svg"
+          alt="DrishtiShala"
+          width={680}
+          height={200}
+          priority
+          className="h-auto w-[172px] brightness-0 invert"
+        />
+        <p className="text-sidebar-foreground/60 mt-0.5 text-[10px]">
           Sundarpur Government High School
         </p>
       </div>

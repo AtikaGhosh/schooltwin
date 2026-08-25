@@ -1,7 +1,8 @@
 'use client'
 
 import type { ReactNode } from 'react'
-import { LockKeyhole, Waypoints } from 'lucide-react'
+import Image from 'next/image'
+import { LockKeyhole } from 'lucide-react'
 
 import { useSchoolTwin } from '@/components/providers/schooltwin-provider'
 import { ErrorState, LoadingState } from '@/components/primitives'
@@ -13,11 +14,15 @@ export function KioskShell({ children }: { children: ReactNode }) {
       <header className="bg-transparent">
         <div className="mx-auto flex max-w-2xl items-center justify-between px-4 py-5 sm:px-8">
           <div className="flex items-center gap-2.5">
-            <span className="brand-mark text-primary-foreground flex size-9 items-center justify-center rounded-lg">
-              <Waypoints className="size-5" />
-            </span>
             <div>
-              <p className="text-sm font-semibold">DrishtiShala</p>
+              <Image
+                src="/drishtishala-logo.svg"
+                alt="DrishtiShala"
+                width={680}
+                height={200}
+                priority
+                className="h-auto w-36 dark:brightness-0 dark:invert"
+              />
               <p className="text-muted-foreground text-[11px]">
                 {locale === 'or'
                   ? 'ଗୋପନୀୟ ଅଂଶଗ୍ରହଣ ପୃଷ୍ଠା'
